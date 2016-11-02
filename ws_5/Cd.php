@@ -1,4 +1,6 @@
 <?php
+require_once("AccesoDatos.php");
+
 class Cd
 {
 	public $id;
@@ -9,7 +11,6 @@ class Cd
 	public static function TraerTodos()
 	{
 		//return "llego traer todos";
-
 
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		
@@ -22,4 +23,14 @@ class Cd
 		return $consulta->fetchall();
 		
 	}
+
+		 public static function InsertarCd($obj)
+	 {
+				$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+				$consulta =$objetoAccesoDato->RetornarConsulta("INSERT into cds (titel,interpret,jahr)values('$obj->titulo','$obj->cantante','$obj->año')");
+				$consulta->execute();
+				return $objetoAccesoDato->RetornarUltimoIdInsertado();
+				
+
+	 }
 }
